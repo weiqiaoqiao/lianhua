@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>水中莲花</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+       .sun {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           background-color: rgba(255, 0, 0, 1);
+           position: absolute;
+           left: 50px;
+           top: 50px;
+       }
+        .sun::before,.sun::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.1);
+            box-shadow: 0 0 10px red;
+        }
+        @keyframes sun {
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+        .sun::before {
+            animation: sun 1s infinite linear;
+        }
+       .sun::after {
+           animation: sun 1s .5s infinite linear;
+       }
+       @keyframes late {
+
+           50% {
+               transform: translateY(20px);
+           }
+       }
+        /*大海*/
+        .sea1 {
+            height: 200px;
+            width: 100%;
+            position: absolute;
+            bottom: -20px;
+            background: url("1.png");
+            animation: late 1s infinite linear;
+        }
+        .sea2 {
+            height: 200px;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            background: url("2.png");
+            animation: late 1.2s  infinite linear;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            /*border: 1px solid #000;*/
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: rotate(-45deg);
+        }
+        .box div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            border-radius: 200px  0px;
+            background-color: rgba(255, 105, 180, 0.5);
+            transform-origin: 0 200px;
+            transition: 5s;
+        }
+    </style>
+</head>
+<body>
+<div class="sun"></div>
+<div class="sea1"></div>
+<div class="sea2"></div>
+<div class="box">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+</body>
+</html>
+<script src="jquery-1.12.2.js"></script>
+<script>
+    var box = document.querySelector('.box');
+    var divs = box.children;
+    var step = 90/divs.length;
+    for(var i = 0;i <= divs.length;i++) {
+        if(i <= (divs.length-1)/2) {
+            var left1 = -(i*step-20);
+            divs[i].style.transform = 'rotate('+left1+'deg)';
+        }else
+         {
+            var right1 = i*step;
+            divs[i].style.transform = 'rotate('+right1+'deg)';
+        }
+
+    }
+
+
+
+
+//    $(function() {
+//        var lenght = $('.box div').last().index();
+//        var step = 90/lenght;
+//        $('.box div').each(function  (index,ele){
+//                if(index<=lenght/2) {
+//                    var left1 = -index*step;
+//                    $(ele).css().transform('rotate',left1+'deg');
+//                }else {
+//                    var right1 = index*step;
+//                    $(ele).css().transform('rotate',right1+'deg');
+//                }
+//         })
+//    })
+</script>
